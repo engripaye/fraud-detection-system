@@ -36,13 +36,13 @@ def main():
         user_feats = rfs.get_user_features(user_id)
         # merge features (simple example)
         feat_vec = []
-        for col in sorted([c for c in tx.keys() if c.startswith("v")]) :
+        for col in sorted([c for c in tx.keys() if c.startswith("v")]):
             feat_vec.append(tx[col])
         # append scaled_amount/time if present
         feat_vec.append(tx.get("scaled_amount", 0.0))
         feat_vec.append(tx.get("scaled_time", 0.0))
         X = np.array(feat_vec).reshape(1, -1)
-        score = model.predict_proba(X)[0,1]
+        score = model.predict_proba(X)[0, 1]
         out = {"transaction_id": tx.get("transaction_id"), "user_id": user_id, "fraud_score": float(score)}
         producer.send("fraud_scores", out)
         print("Processed:", out)
