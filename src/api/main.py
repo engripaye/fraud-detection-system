@@ -51,3 +51,5 @@ def predict(tx: Transaction):
     return {"fraud_score": float(score)}
 
 @app.get("/predict")    
+def read_root():
+    return {"message": "Welcome to the Fraud Detection System API. Use the /predict endpoint to get fraud scores."}
