@@ -49,3 +49,5 @@ def predict(tx: Transaction):
     X = np.array(arr).reshape(1, -1)
     score = model.predict_proba(X)[0, 1]
     return {"fraud_score": float(score)}
+
+@app.get("/predict")    
